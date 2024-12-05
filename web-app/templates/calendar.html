@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <title>Calendar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Calendar for {{ month }}/{{ year }}</h1>
+    <h1>{{ month }}/{{ year }}</h1>
     <table>
         {% for week in month_days %}
         <tr>

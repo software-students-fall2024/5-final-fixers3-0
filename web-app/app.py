@@ -48,15 +48,11 @@ def register():
             flash("Username already exists. Please choose another.", "error")
             return redirect(url_for("register"))
 
-        try:
-            # Create new user with hashed password
-            hashed_password = generate_password_hash(password, method="pbkdf2:sha256")
-            users_collection.insert_one({"username": username, "password": hashed_password})
-            flash("Registration successful. Please log in.", "success")
-            return redirect(url_for("login"))
-        except Exception as e:
-            flash(f"An error occurred: {e}", "error")
-            return redirect(url_for("register"))
+        # Create new user
+        hashed_password = generate_password_hash(password, method="sha256")
+        users_collection.insert_one({"username": username, "password": hashed_password})
+        flash("Registration successful. Please log in.", "success")
+        return redirect(url_for("login"))
 
     return render_template("register.html")
 
