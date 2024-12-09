@@ -66,12 +66,23 @@ jobs:
             docker system prune -f
             docker pull ${{ secrets.DOCKER_USERNAME }}/web-app:latest
             if docker ps -a --format '{{.Names}}' | grep -Eq "^web-app$"; then
+              echo "Stopping and removing the existing web-app container..."
               docker stop web-app || true
               docker rm web-app || true
             fi
+            echo "Checking for port conflicts on port 5001..."
             if lsof -i :5001; then
+              echo "Port 5001 is in use. Freeing the port..."
               fuser -k 5001/tcp
             fi
+            echo "Starting the new web-app container..."
             docker run -d -p 5001:5001 --name web-app ${{ secrets.DOCKER_USERNAME }}/web-app:latest
+            echo "Verifying the web-app container status..."
+            if ! docker ps | grep -q "web-app"; then
+              echo "Error: The web-app container failed to start."
+              exit 1
+            fi
+
+            echo "Web-app deployed successfully."
 
 
