@@ -6,7 +6,8 @@ services:
     ports:
       - "5001:5001"
     environment:
-      - MONGO_URI=mongodb://mongo:27017
+      #- MONGO_URI=mongodb+srv://jk7024:finalfixers@cluster0.ouqoy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - MONGO_URI= "mongodb://localhost:27017"
       - ML_CLIENT_URL=http://machine-learning-client:5002/analyze
     depends_on:
       - mongo
