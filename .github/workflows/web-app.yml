@@ -69,11 +69,16 @@ jobs:
               echo "Stopping and removing the existing web-app container..."
               docker stop web-app || true
               docker rm web-app || true
+            else
+              echo "No existing web-app container found."
             fi
             echo "Checking for port conflicts on port 5001..."
             if lsof -i :5001; then
               echo "Port 5001 is in use. Freeing the port..."
               fuser -k 5001/tcp
+              sleep 2 
+            else
+              echo "Port 5001 is free."
             fi
             echo "Starting the new web-app container..."
             docker run -d -p 5001:5001 --name web-app ${{ secrets.DOCKER_USERNAME }}/web-app:latest
