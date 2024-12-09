@@ -39,52 +39,52 @@ The Journal App is a web application designed to help users track their daily em
 ---
 
 ### **Opening app**
-**1. Ensure Connection to Mongo**
+**1. Clone the respository:**
 
-Download the MongoDB for VSC extension and add the database url: 'mongodb+srv://nsb8225:thefixers3.1@cluster0.8b6tk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0' when prompted to connect to the database.
-
-**2. Create a new virtual environment following the commands:**
-
+```bash
+    git clone https://github.com/software-students-fall2024/5-final-fixers3-0.git
+    cd 5-final-fixers3-0
 ```
+**2. Set up environment variables:**
+
+```bash
+MONGO_URI=
+SECRET_KEY=
+FLASK_PORT=5001
+FLASK_DEBUG=1
+```
+
+**3. Create a new virtual environment following the commands:**
+
+```bash
 python3 -m venv .venv
 
 ```
 
 **Mac** 
-```
+```bash
 source .venv/bin/activate
 ```
 
 **Windows**
-```
+```bash
 .venv\Scripts\activate
 ```
 
-**3. Install Dependencies if not already installed**
+**4. Install Dependencies if not already installed**
 
-```
+```bash
 pip install -r requirements.txt
 
 ```
 
-Or alternatively 
-
-```
-pip install pipenv
-
-pipenv install
-
-pipenv shell
-
-```
-
-**4. Docker Compose**
+**5. Docker Compose**
 
 Make sure that the Docker Desktop is downloaded and you are logged into your account before running the following comand:
 
-```
+```bash
 docker-compose up --build
 
 ```
 
-**5. Open the local host link for web-app and enjoy!**
+## **Digital Ocean**
