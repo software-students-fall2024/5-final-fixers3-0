@@ -24,6 +24,7 @@ app.secret_key = os.getenv("SECRET_KEY", "test_secret_key")
 MONGO_URI = os.getenv("uri")
 MONGO_DBNAME = os.getenv("MONGO_DBNAME", "default_db_name")
 client = MongoClient(MONGO_URI, server_api=ServerApi("1"))
+
 db = client[MONGO_DBNAME]
 users_collection = db["users"]
 journal_collection = db["journals"]
