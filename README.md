@@ -11,11 +11,11 @@ The Journal App is a web application designed to help users track their daily em
 
 ### **1. Machine Learning Client**
 - **Functionality**: Uses a Hugging Face pre-trained model ([distilbert-base-uncased-emotion](https://huggingface.co/bhadresh-savani/distilbert-base-uncased-emotion)) to classify emotions from text.
-- **Docker Image**: [ML Client on DockerHub]([https://hub.docker.com/r/<username>/ml-client](https://hub.docker.com/repository/docker/dm5198/machine-learning-client/general))
+- **Docker Image**: [ML Client on DockerHub]([https://hub.docker.com/repository/docker/dm5198/machine-learning-client/general])
 
 ### **2. Web Application**
 - **Functionality**: Provides the frontend and backend for journal management.
-- **Docker Image**: [Web App on DockerHub]([https://hub.docker.com/r/<username>/web-app](https://hub.docker.com/repository/docker/dm5198/web-app/general))
+- **Docker Image**: [Web App on DockerHub]([https://hub.docker.com/repository/docker/dm5198/web-app/general])
 
 ---
 
