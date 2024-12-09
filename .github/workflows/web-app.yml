@@ -76,9 +76,16 @@ jobs:
             if lsof -i :5001; then
               echo "Port 5001 is in use. Freeing the port..."
               fuser -k 5001/tcp
-              sleep 2 
+              sleep 3
             else
               echo "Port 5001 is free."
+            fi
+            if lsof -i :5001; then
+              echo "Error: Port 5001 is still in use. Investigating further..."
+              lsof -i :5001
+              echo "Attempting to reset Docker networking..."
+              systemctl restart docker || true
+              sleep 3
             fi
             echo "Starting the new web-app container..."
             docker run -d -p 5001:5001 --name web-app ${{ secrets.DOCKER_USERNAME }}/web-app:latest
