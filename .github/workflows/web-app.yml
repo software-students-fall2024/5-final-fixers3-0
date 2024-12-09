@@ -63,9 +63,10 @@ jobs:
           password: ${{ secrets.DO_SERVER_PASSWORD }}
           port: 22
           script: |
+            docker system prune -f
             docker pull ${{ secrets.DOCKER_USERNAME }}/web-app:latest
             docker stop web-app || true
             docker rm web-app || true
-            docker run -d -p 5001:5001 --name web-app ${{ secrets.DOCKER_USERNAME }}/web-app:latest
+            docker run -d -P --name web-app ${{ secrets.DOCKER_USERNAME }}/web-app:latest
 
 
