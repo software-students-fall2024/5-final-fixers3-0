@@ -65,8 +65,10 @@ jobs:
           script: |
             docker system prune -f
             docker pull ${{ secrets.DOCKER_USERNAME }}/web-app:latest
-            docker stop web-app || true
-            docker rm web-app || true
+            if docker ps -a --format '{{.Names}}' | grep -Eq "^web-app$"; then
+              docker stop web-app || true
+              docker rm web-app || true
+            fi
             docker run -d -P --name web-app ${{ secrets.DOCKER_USERNAME }}/web-app:latest
 
 
