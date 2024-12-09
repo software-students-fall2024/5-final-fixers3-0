@@ -67,6 +67,11 @@ jobs:
           script: |
             IMAGE_TAG=${{ github.sha }}
             docker pull ${{ secrets.DOCKER_USERNAME }}/machine-learning-client:latest
-            docker stop machine-learning-client || true
-            docker rm machine-learning-client || true
+            if docker ps -a --format '{{.Names}}' | grep -Eq "^machine-learning-client$"; then
+              docker stop machine-learning-client || true
+              docker rm machine-learning-client || true
+            fi
+            if lsof -i :5002; then
+              fuser -k 5002/tcp
+            fi
             docker run -d -p 5002:5002 --name machine-learning-client ${{ secrets.DOCKER_USERNAME }}/machine-learning-client:latest

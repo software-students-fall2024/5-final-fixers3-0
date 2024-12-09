@@ -69,6 +69,9 @@ jobs:
               docker stop web-app || true
               docker rm web-app || true
             fi
-            docker run -d -P --name web-app ${{ secrets.DOCKER_USERNAME }}/web-app:latest
+            if lsof -i :5001; then
+              fuser -k 5001/tcp
+            fi
+            docker run -d -p 5001:5001 --name web-app ${{ secrets.DOCKER_USERNAME }}/web-app:latest
 
 
