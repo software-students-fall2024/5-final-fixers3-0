@@ -88,3 +88,4 @@ docker-compose up --build
 ```
 
 ## **Digital Ocean**
+(http://206.189.193.198:5001/login)
