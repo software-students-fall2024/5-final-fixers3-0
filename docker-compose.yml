@@ -1,32 +1,43 @@
+version: "3.9"
+
 services:
   web-app:
     build:
-      context: ./web-app  # Path to the web-app directory
+      context: ./web-app 
       dockerfile: Dockerfile
     ports:
-      - "5001:5001"
+      - "5001:5001" 
     environment:
-      #- MONGO_URI=mongodb+srv://jk7024:finalfixers@cluster0.ouqoy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-      - MONGO_URI= "mongodb://localhost:27017"
+      - MONGO_URI=mongodb+srv://nsb8225:thefixers3.1@cluster0.8b6tk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       - ML_CLIENT_URL=http://machine-learning-client:5002/analyze
     depends_on:
       - mongo
       - machine-learning-client
+    networks:
+      - app-network
 
   machine-learning-client:
     build:
-      context: ./machine-learning-client
+      context: ./machine-learning-client  
       dockerfile: Dockerfile
     ports:
-      - "5002:5002"
+      - "5002:5002" 
+    networks:
+      - app-network
 
   mongo:
-    image: mongo
+    image: mongo 
     container_name: mongo
     ports:
-      - "27017:27017"
+      - "27017:27017"  
     volumes:
-      - mongo-data:/data/db
+      - mongo-data:/data/db  
+    networks:
+      - app-network
 
 volumes:
   mongo-data:
+
+networks:
+  app-network:
+    driver: bridge
