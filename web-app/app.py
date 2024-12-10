@@ -21,10 +21,12 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "test_secret_key")
 
 # MongoDB configuration
-MONGO_URI = os.getenv("uri")
-MONGO_DBNAME = os.getenv("MONGO_DBNAME", "default_db_name")
-client = MongoClient(MONGO_URI, server_api=ServerApi("1"))
+MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://nsb8225:thefixers3.1@cluster0.8b6tk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+#MONGO_URI="mongodb://mongo:27017"
 
+MONGO_DBNAME = os.getenv("MONGO_DBNAME", "default_db_name")
+
+client = MongoClient(MONGO_URI)
 db = client[MONGO_DBNAME]
 users_collection = db["users"]
 journal_collection = db["journals"]

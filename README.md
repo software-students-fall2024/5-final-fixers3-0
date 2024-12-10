@@ -48,8 +48,12 @@ The Journal App is a web application designed to help users track their daily em
 **2. Set up environment variables:**
 
 ```bash
+MONGO_DBNAME=SWE_Project_5
 MONGO_URI=
 SECRET_KEY=
+ML_CLIENT_URL=http://ml-client:5002/analyze
+FLASK_APP=app.py
+FLASK_ENV=production
 FLASK_PORT=5001
 FLASK_DEBUG=1
 ```

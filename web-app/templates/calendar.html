@@ -8,15 +8,17 @@
     <div class="container">
         <h1 class="welcome">Your Calendar</h1>
         <p class="intro">Here is your calendar for {{ month }}/{{ year }}. Click on a day to view, edit, or add a journal entry.</p>
+        
         {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
+        {% if messages %}
             <ul>
-              {% for category, message in messages %}
-                <li class="{{ category }}">{{ message }}</li>
-              {% endfor %}
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
             </ul>
-          {% endif %}
+        {% endif %}
         {% endwith %}
+
         <div class="calendar-container">
             <table class="calendar">
                 {% for week in month_days %}
@@ -25,7 +27,7 @@
                     <td>
                         {% if day != 0 %}
                             {% if day in journal_entries %}
-                                {% set mood = journal_entries[day]['analysis']['top_emotion']['label'] %}
+                                {% set mood = journal_entries[day].get('analysis', {}).get('top_emotion', {}).get('label', 'neutral') %}
                                 <a href="{{ url_for('journal', year=year, month=month, day=day) }}">
                                     <button class="calendar-day entry-day {{ mood }}">
                                         {{ day }}
@@ -65,5 +67,3 @@
     </div>
 </body>
 </html>
-
-
